@@ -6,8 +6,8 @@ async function main() {
   const signers = await ethers.getSigners();
   const NFTMint = await ethers.getContractFactory("NFTMintUpgradable");
   console.log("Deploying NFTMint...");
-  const nameToken = "LIR MUSIC PROVA_";
-  const symbolToken = "GMCZ_";
+  const nameToken = "LIRmusic";
+  const symbolToken = "lir";
   const ownerAddress = signers[0].address;
   const nftMint = await upgrades.deployProxy(NFTMint, [nameToken, symbolToken, ownerAddress], { initializer: 'initialize' });
 
