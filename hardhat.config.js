@@ -1,7 +1,6 @@
 require("@nomicfoundation/hardhat-toolbox");
 require('@openzeppelin/hardhat-upgrades');
 require("@chainlink/env-enc").config();
-//require("dotenv").config();
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -10,12 +9,12 @@ module.exports = {
     hardhat: {},
     polygon_mumbai: {
       url: process.env.ALCHEMY_RPC_MUMBAI, //process.env.ALCHEMY_URL,
-      accounts: [`0x${process.env.PRIVATE_KEY_LIR}`, `0x${process.env.PRIVATE_KEY_LIR_2}`]
+      accounts: [`0x${process.env.PRIVATE_KEY_LIR_TESTNET}`]
     },
-    // polygon_mainnet: {
-    //   url: process.env.ALCHEMY_RPC_MAINNET,
-    //   accounts: [`0x${process.env.PRIVATE_KEY_TROVIERO}`]
-    // }
+    polygon_mainnet: {
+      url: process.env.ALCHEMY_RPC_MAINNET,
+      accounts: [`0x${process.env.PRIVATE_KEY_LIR}`]
+    }
   },
   etherscan: {
     apiKey: 'EBBCDV7REM2FADS57V48ZB16BJIBXCSJAG'
