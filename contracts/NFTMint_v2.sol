@@ -39,7 +39,7 @@ interface Marketplace {
     ) external;
 }
 
-contract NFTMintUpgradable is ERC1155URIStorageUpgradeable {
+contract NFTMintUpgradableV2 is ERC1155URIStorageUpgradeable {
     using CountersUpgradeable for CountersUpgradeable.Counter;
     CountersUpgradeable.Counter private _tokenIds;
 
@@ -194,5 +194,9 @@ contract NFTMintUpgradable is ERC1155URIStorageUpgradeable {
 
     function getLastTokenId() public view returns (uint256) {
         return _tokenIds.current();
+    }
+
+    function incrementLastTokenId() public view returns (uint256) {
+        return _tokenIds.current() + 1;
     }
 }
