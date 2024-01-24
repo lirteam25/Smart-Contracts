@@ -1,7 +1,7 @@
 const { ethers, upgrades } = require('hardhat');
 
 async function main() {
-    const exchangeRateAddress = "0xAB594600376Ec9fD91F8e885dADF0CE036862dE0";
+    const exchangeRateAddress = "0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada";
     //0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada
     //0xAB594600376Ec9fD91F8e885dADF0CE036862dE0
     const NFTMarketplace = await ethers.getContractFactory("NFTMarketplaceUpgradable");
