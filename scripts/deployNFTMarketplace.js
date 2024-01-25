@@ -1,4 +1,5 @@
 const { ethers, upgrades } = require('hardhat');
+const { getImplementationAddress } = require('@openzeppelin/upgrades-core');
 
 async function main() {
     const exchangeRateAddress = "0xAB594600376Ec9fD91F8e885dADF0CE036862dE0";
@@ -10,7 +11,12 @@ async function main() {
 
     await nftMarketplace.waitForDeployment();
 
-    console.log('NFTMarketplace deployed to:', (await nftMarketplace.getAddress()).toLowerCase());
+    const proxyAddress = (await nftMarketplace.getAddress()).toLowerCase();
+    console.log('NFTMarketplace proxy deployed to:', proxyAddress);
+
+    // Retrieve and log the implementation address
+    const implementationAddress = await getImplementationAddress(ethers.provider, proxyAddress);
+    console.log('NFTMarketplace implementation deployed to:', implementationAddress.toLowerCase());
 }
 
 // We recommend this pattern to be able to use async/await everywhere

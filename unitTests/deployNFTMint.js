@@ -1,6 +1,5 @@
 const { ethers, upgrades } = require('hardhat');
 const { getImplementationAddress } = require('@openzeppelin/upgrades-core');
-const hre = require("hardhat");
 
 async function main() {
   const signers = await ethers.getSigners();
