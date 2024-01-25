@@ -9,7 +9,7 @@ module.exports = {
     hardhat: {},
     polygon_mumbai: {
       url: process.env.ALCHEMY_RPC_MUMBAI,
-      accounts: [`0x${process.env.PRIVATE_KEY_LIR_TESTNET}`]
+      accounts: [`0x${process.env.PRIVATE_KEY_LIR_TESTNET_SAFE}`]
     },
     polygon_mainnet: {
       url: process.env.ALCHEMY_RPC_MAINNET,
