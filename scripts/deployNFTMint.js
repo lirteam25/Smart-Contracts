@@ -1,19 +1,26 @@
 const { ethers, upgrades } = require('hardhat');
+const { getImplementationAddress } = require('@openzeppelin/upgrades-core');
+const hre = require("hardhat");
 
 async function main() {
+  const signers = await ethers.getSigners();
   const NFTMint = await ethers.getContractFactory("NFTMintUpgradable");
   console.log("Deploying NFTMint...");
-  const nameToken = "LIR MUSIC PROVA";
-  const symbolToken = "GMCZ";
-  const nftMint = await upgrades.deployProxy(NFTMint, [nameToken, symbolToken], { initializer: 'initialize' });
+  const nameToken = "LIR MUSIC IMPLEMENTATION";
+  const symbolToken = "LRI";
+  const ownerAddress = signers[0].address;
+  const nftMint = await upgrades.deployProxy(NFTMint, [nameToken, symbolToken, ownerAddress], { initializer: 'initialize' });
 
   await nftMint.waitForDeployment();
 
-  console.log('NFTMint deployed to:', (await nftMint.getAddress()).toLowerCase());
+  const proxyAddress = (await nftMint.getAddress()).toLowerCase();
+  console.log('NFTMint proxy deployed to:', proxyAddress);
+
+  // Retrieve and log the implementation address
+  const implementationAddress = await getImplementationAddress(ethers.provider, proxyAddress);
+  console.log('NFTMint implementation deployed to:', implementationAddress.toLowerCase());
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main()
   .then(() => process.exit(0))
   .catch((error) => {

@@ -2,8 +2,10 @@ const { expect } = require("chai");
 const { ethers, upgrades } = require("hardhat");
 
 describe("Testing Contract Interactions", function () {
+    let contractFactory;
     let nftMint;
     let nftMarketplace;
+    let contractFactoryAddress;
     let nftMintAddress;
     let nftMarketplaceAddress;
     let owner;
@@ -38,6 +40,12 @@ describe("Testing Contract Interactions", function () {
         console.log("nftMarketplace deployed to:", nftMarketplaceAddress);
     });
 
+    it("Create Minting Contract from contract Factory", async function () {
+        this.timeout(310000);
+
+
+
+    })
 
     it("Set Minting Contract in NFTMarketplace", async function () {
         this.timeout(310000);

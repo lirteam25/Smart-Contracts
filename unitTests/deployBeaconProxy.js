@@ -1,10 +1,9 @@
-const {ethers} = require("hardhat");
+const { ethers } = require("hardhat");
 
 async function main() {
     // Getting the signer from Hardhat's environment
     const signers = await ethers.getSigners();
     const beacon_admin = signers[0];
-    const proxy_admin = signers[1];
 
     // NFTMintFactory contract address
     const factoryAddress = "0xB0690f215B41a51a6E108F68E732C206FD4e44A8";

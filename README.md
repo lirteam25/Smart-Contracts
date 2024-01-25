@@ -21,6 +21,10 @@ npx hardhat run scripts/deployNFTMint.js --network polygon_mainnet
 npx hardhat run scripts/deployNFTMarketplace.js --network polygon_mumbai
 npx hardhat run scripts/deployNFTMarketplace.js --network polygon_mainnet
 
+//Deployment Factory Contract
+npx hardhat run scripts/deployFactoryContract.js --network polygon_mumbai (remeber to add NFT Mint implementation contract address)
+npx hardhat run scripts/deployFactoryContract.js --network polygon_mainnet (remeber to add NFT Mint implementation contract address)
+
 //To verify the contract and the Implementation-Proxy link 
 npx hardhat verify --contract "contracts/NFTMint.sol:NFTMintUpgradable" contract.address --network polygon_mumbai
 npx hardhat verify --contract "contracts/NFTMint.sol:NFTMintUpgradable" contract.address --network polygon_mainnet

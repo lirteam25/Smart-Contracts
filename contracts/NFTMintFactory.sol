@@ -8,7 +8,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract NFTMintFactory is Ownable {
     UpgradeableBeacon public beacon;
 
-    event NFTMintDeployed(address indexed proxyAddress, address indexed creator);
+    event NFTMintDeployed(
+        address indexed proxyAddress,
+        address indexed creator
+    );
     event BeaconCreated(address beaconAddress);
 
     constructor(address _implementation) Ownable(msg.sender) {
@@ -17,14 +20,13 @@ contract NFTMintFactory is Ownable {
     }
 
     function createNFTMint(bytes memory _data) public {
-        BeaconProxy proxy = new BeaconProxy(
-            address(beacon),
-            _data
-        );
+        BeaconProxy proxy = new BeaconProxy(address(beacon), _data);
         emit NFTMintDeployed(address(proxy), msg.sender);
     }
 
-    function updateBeaconImplementation(address _newImplementation) public onlyOwner {
+    function updateBeaconImplementation(
+        address _newImplementation
+    ) public onlyOwner {
         beacon.upgradeTo(_newImplementation);
     }
 }

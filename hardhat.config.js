@@ -8,7 +8,7 @@ module.exports = {
   networks: {
     hardhat: {},
     polygon_mumbai: {
-      url: process.env.ALCHEMY_RPC_MUMBAI, //process.env.ALCHEMY_URL,
+      url: process.env.ALCHEMY_RPC_MUMBAI,
       accounts: [`0x${process.env.PRIVATE_KEY_LIR_TESTNET}`]
     },
     polygon_mainnet: {
