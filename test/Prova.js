@@ -26,7 +26,7 @@ describe("Testing Contract Interactions", function () {
         const nameToken = "PROVA"
         const symbolToken = "CIAO"
         const ownerAddress = owner.address
-        nftMint = await upgrades.deployProxy(NFTMint, [nameToken, symbolToken], ownerAddress, { initializer: "initialize" });
+        nftMint = await upgrades.deployProxy(NFTMint, [nameToken, symbolToken, ownerAddress], { initializer: "initialize" });
         await nftMint.waitForDeployment();
         nftMintAddress = await nftMint.getAddress();
         console.log("nftMint deployed to:", nftMintAddress);
@@ -77,14 +77,29 @@ describe("Testing Contract Interactions", function () {
     it("Test MarketSaleMaticGasFree with price zero", async function () {
         this.timeout(310000);
     
+        let balanceOfSellerBefore = await nftMint.balanceOf(owner.address, tokenId);
+        let balanceOfBuyerBefore = await nftMint.balanceOf(secondAccount.address, tokenId);
+
+        // Convert to BigNumber
+        balanceOfSellerBefore = ethers.utils.parseUnits(balanceOfSellerBefore.toString());
+        balanceOfBuyerBefore = ethers.utils.parseUnits(balanceOfBuyerBefore.toString());
+
         // Call MarketSaleMaticGasFree as the owner of the marketplace
         const transaction = await nftMarketplace.connect(owner).MarketSaleMaticGasFree(
-                tokenId,
-                nftMintAddress,
-                owner.address, // Token seller's address
-                secondAccount.address // Token buyer's address
-            );
+            tokenId,
+            nftMintAddress,
+            owner.address, // Token seller's address
+            secondAccount.address // Token buyer's address
+        );
         await transaction.wait();
+
+        // After transfer: Check ownership
+        const balanceOfSellerAfter = await nftMint.balanceOf(owner.address, tokenId);
+        const balanceOfBuyerAfter = await nftMint.balanceOf(secondAccount.address, tokenId);
+
+        // Assert the transfer of ownership
+        expect(balanceOfSellerBefore.sub(1)).to.equal(balanceOfSellerAfter);
+        expect(balanceOfBuyerBefore.add(1)).to.equal(balanceOfBuyerAfter);
     });
     
 })

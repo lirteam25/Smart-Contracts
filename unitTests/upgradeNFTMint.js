@@ -2,7 +2,7 @@ const { ethers, upgrades } = require("hardhat");
 const { getImplementationAddress } = require('@openzeppelin/upgrades-core');
 
 async function main() {
-    const proxyAddress = "0xe74bae54ba32b9b2d3efde1717779551b3df907c"; // Replace with your proxy address
+    const proxyAddress = "0xc9db66ecb75075f345c20af65c0d3d2f72df7bdf"; // Replace with your proxy address
 
     const NFTMintV2 = await ethers.getContractFactory("NFTMintUpgradableV2");
     console.log("Upgrading NFTMint...");

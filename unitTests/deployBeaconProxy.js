@@ -7,17 +7,17 @@ async function main() {
     const proxy_admin = signers[1];
 
     // NFTMintFactory contract address
-    const factoryAddress = "0x5166728452CcFedE1D280B55D4a51211Ec135afB";
+    const factoryAddress = "0xB0690f215B41a51a6E108F68E732C206FD4e44A8";
 
     // Load the NFTMintFactory contract using Hardhat's environment
-    const NFTMintFactory = await ethers.getContractFactory("NFTMintFactory", proxy_admin);
+    const NFTMintFactory = await ethers.getContractFactory("NFTMintFactory", beacon_admin);
     const factoryContract = NFTMintFactory.attach(factoryAddress);
 
     // Data for initializing the new NFTMint contract
     // Assuming you want to initialize with specific name and symbol
-    const nameToken = "ArtistNFT2";
-    const symbolToken = "ART2";
-    const ownerAddress = proxy_admin.address
+    const nameToken = "testNFT2";
+    const symbolToken = "TNFT2";
+    const ownerAddress = beacon_admin.address
     const NFTMint = await ethers.getContractFactory("NFTMintUpgradable");
     const initData = NFTMint.interface.encodeFunctionData("initialize", [nameToken, symbolToken, ownerAddress]);
 
