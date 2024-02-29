@@ -1,6 +1,4 @@
 const { ethers, upgrades } = require('hardhat');
-const { getImplementationAddress } = require('@openzeppelin/upgrades-core');
-const hre = require("hardhat");
 
 async function main() {
   const signers = await ethers.getSigners();
@@ -15,10 +13,6 @@ async function main() {
 
   const proxyAddress = (await nftMint.getAddress()).toLowerCase();
   console.log('NFTMint proxy deployed to:', proxyAddress);
-
-  // Retrieve and log the implementation address
-  const implementationAddress = await getImplementationAddress(ethers.provider, proxyAddress);
-  console.log('NFTMint implementation deployed to:', implementationAddress.toLowerCase());
 }
 
 main()
