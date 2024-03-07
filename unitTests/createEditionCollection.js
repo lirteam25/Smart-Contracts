@@ -4,21 +4,17 @@ const { ThirdwebSDK } = require("@thirdweb-dev/sdk");
 async function main() {
     try {
         // The address of your deployed Beacon Proxy
-        const beaconProxyAddress = "0xC1CF42c4d8cc13bdAb713709D333Ca74c53A49EA"; //"0xB9e7771a68BeC052A46cD264d4B32966F2A4893c" 
+        const nftMintAddress = "0x4dC5a900D414454bfFe05F1128F21D529D1b4062"
         const signers = await ethers.getSigners();
-        const beacon_admin = signers[1];
+        const admin = signers[1];
 
-        const sdk_ = new ThirdwebSDK("mumbai", {
-        secretKey: process.env.THIRDWEB_API_KEY,
-      });
-
-        const sdk = ThirdwebSDK.fromPrivateKey(process.env.PRIVATE_KEY_LIR_TESTNET, "mumbai");
-        const nftMint = await sdk.getContract(beaconProxyAddress);
+        const sdk = await ThirdwebSDK.fromSigner(admin, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
+        const nftMint = await sdk.getContract(nftMintAddress);
 
         // Data for creating an NFT
-        const _to = beacon_admin.address;
+        const _to = admin.address;
         const _tokenId = ethers.constants.MaxUint256;
-        const _uri = "NA";
+        const _uri = "Collection";
         const _amount = 100;
 
         // Call the createToken function

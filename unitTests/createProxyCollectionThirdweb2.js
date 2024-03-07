@@ -1,5 +1,4 @@
 const { ethers } = require("hardhat");
-const { ThirdwebSDK } = require("@thirdweb-dev/sdk");
 
 async function main() {
     try {
@@ -8,21 +7,21 @@ async function main() {
         const signers = await ethers.getSigners();
         const beacon_admin = signers[1];
 
-        const sdk_ = new ThirdwebSDK("mumbai", {
-        secretKey: process.env.THIRDWEB_API_KEY,
-      });
+        // ABI for the NFTMint contract
+        const NFTMintABI = require('../NFTMintABI.json'); // Adjust the path accordingly 
 
-        const sdk = ThirdwebSDK.fromPrivateKey(process.env.PRIVATE_KEY_LIR_TESTNET, "mumbai");
-        const nftMint = await sdk.getContract(beaconProxyAddress);
+        // Create a contract instance for NFTMint using its ABI
+        const nftMint = new ethers.Contract(beaconProxyAddress, NFTMintABI, beacon_admin);
 
         // Data for creating an NFT
         const _to = beacon_admin.address;
         const _tokenId = ethers.constants.MaxUint256;
-        const _uri = "NA";
-        const _amount = 100;
+        const _uri = "beaconProxyMint";
+        const _amount = 10; 
 
+        console.log('Calling the Minting function')
         // Call the createToken function
-        const createTokenTx = await nftMint.call("mintTo", [_to, _tokenId, _uri, _amount]);
+        const createTokenTx = await nftMint.mintTo(_to, _tokenId, _uri, _amount);
         //await createTokenTx.wait();
         
         console.log("Transaction successful!");
