@@ -8,16 +8,12 @@ async function main() {
         const signers = await ethers.getSigners();
         const beacon_admin = signers[1];
 
-        const sdk_ = new ThirdwebSDK("mumbai", {
-        secretKey: process.env.THIRDWEB_API_KEY,
-      });
-
-        const sdk = ThirdwebSDK.fromPrivateKey(process.env.PRIVATE_KEY_LIR_TESTNET, "mumbai");
+        const sdk = await ThirdwebSDK.fromSigner(beacon_admin, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
         const nftMint = await sdk.getContract(beaconProxyAddress);
 
         // Data for creating an NFT
         const _to = beacon_admin.address;
-        const _tokenId = ethers.constants.MaxUint256;
+        const _tokenId = 1;//ethers.constants.MaxUint256;
         const _uri = "NA";
         const _amount = 100;
 

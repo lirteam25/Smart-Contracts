@@ -51,10 +51,9 @@ async function main() {
     const tx = await factoryContract.createNFTMint(initData);
     console.log(tx);
 
-    // Find the deployed proxy address from the event
-    // const event = tx.logs.find(event => event.event === 'NFTMintDeployed');
-    // const proxyAddress = event.args.proxyAddress;
-    // console.log("Deployed NFTMint proxy address:", proxyAddress);
+    //grant minter role to artist
+    //await contract.roles.grant("minter", "{{wallet_address}}");
+
 }
 
 main().catch(error => {
