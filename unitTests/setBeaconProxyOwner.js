@@ -11,14 +11,9 @@ async function main() {
         const sdk = await ThirdwebSDK.fromSigner(beacon_admin, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
         const nftMint = await sdk.getContract(beaconProxyAddress);
 
-        // Data for creating an NFT
-        const _to = beacon_admin.address;
-        const _tokenId = ethers.constants.MaxUint256;
-        const _uri = "NA";
-        const _amount = 100;
-
         // Call the createToken function
-        const createTokenTx = await nftMint.call("mintTo", [_to, _tokenId, _uri, _amount]);
+        const createTokenTx = await nftMint.call("setOwner", [beacon_admin.address]);
+        console.log(createTokenTx)
         //await createTokenTx.wait();
         
         console.log("Transaction successful!");

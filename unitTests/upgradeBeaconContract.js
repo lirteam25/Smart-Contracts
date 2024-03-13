@@ -1,16 +1,17 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-    const factoryAddress = "0x5166728452CcFedE1D280B55D4a51211Ec135afB"; // Replace with your factory contract address
-    const newImplementationAddress = "0xc05a733afcd95aa612be614ad76beed647db71cd";
+    const factoryAddress = "0xC7A9074039C7ef74c8fb087dFA9546B4917510f7"//"0x5166728452CcFedE1D280B55D4a51211Ec135afB"; // Replace with your factory contract address
+    const newImplementationAddress = "0xCCf28A443e35F8bD982b8E8651bE9f6caFEd4672"//"0xc05a733afcd95aa612be614ad76beed647db71cd";
     const signers = await ethers.getSigners(); // Fetch the signers
+    
 
     // Connect to the deployed NFTMintFactory
     const NFTMintFactory = await ethers.getContractFactory("NFTMintFactory");
     const factory = NFTMintFactory.attach(factoryAddress);
 
     // The first signer is assumed to be the owner
-    const owner = signers[0];
+    const owner = signers[2];
 
     // Upgrade the beacon implementation
     const tx = await factory.connect(owner).updateBeaconImplementation(newImplementationAddress);

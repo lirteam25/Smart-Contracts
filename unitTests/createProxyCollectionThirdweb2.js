@@ -3,9 +3,9 @@ const { ethers } = require("hardhat");
 async function main() {
     try {
         // The address of your deployed Beacon Proxy
-        const beaconProxyAddress = "0xC1CF42c4d8cc13bdAb713709D333Ca74c53A49EA"; //"0xB9e7771a68BeC052A46cD264d4B32966F2A4893c" 
+        const beaconProxyAddress = "0xF68C94c0BdfA9492A5FE931011583A4bDb43d94f"//"0xC1CF42c4d8cc13bdAb713709D333Ca74c53A49EA"; //"0xB9e7771a68BeC052A46cD264d4B32966F2A4893c" 
         const signers = await ethers.getSigners();
-        const beacon_admin = signers[1];
+        const beacon_admin = signers[2];
 
         // ABI for the NFTMint contract
         const NFTMintABI = require('../NFTMintABI.json'); // Adjust the path accordingly 
