@@ -2,7 +2,7 @@ const { ethers } = require("hardhat");
 
 async function main() {
     // The address of your deployed Beacon Proxy
-    const beaconProxyAddress = "0x558aB695c56826055D460c1aa2e304Ec257cd258";
+    const beaconProxyAddress = "0xe0C6ABd9b1B1AB7a8EF867F97226C0890C9Faeb6";
 
     // The account that will interact with the contract
     // Ensure this account is the owner of the contract

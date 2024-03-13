@@ -5,7 +5,9 @@ async function main() {
   console.log("Deploying NFTMint...");
   const nameToken = "LIR MUSIC PROVA";
   const symbolToken = "GMCZ";
-  const nftMint = await upgrades.deployProxy(NFTMint, [nameToken, symbolToken], { initializer: 'initialize' });
+  const signers = await ethers.getSigners();
+  const owner = signers[0]
+  const nftMint = await upgrades.deployProxy(NFTMint, [nameToken, symbolToken, owner.address], { initializer: 'initialize' });
 
   await nftMint.waitForDeployment();
 

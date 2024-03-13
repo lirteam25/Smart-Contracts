@@ -7,7 +7,7 @@ async function main() {
     const proxy_admin = signers[1];
 
     // NFTMintFactory contract address
-    const factoryAddress = "0xB0690f215B41a51a6E108F68E732C206FD4e44A8";
+    const factoryAddress = "0xC7DB5f3f985845027d5aE80FEfAA1fF0ddEa61A3";
 
     // Load the NFTMintFactory contract using Hardhat's environment
     const NFTMintFactory = await ethers.getContractFactory("NFTMintFactory", beacon_admin);

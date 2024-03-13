@@ -2,11 +2,11 @@ const { ethers } = require("hardhat");
 
 async function main() {
     // Replace with the actual addresses
-    const marketplaceAddress = "0xd240a511b1d7702a6cd72d1e9947ed61afd6cb6a";
-    const beaconProxyAddress = "0xf3E60c9b99C4Fd613eC14f0880E913B673B8d500";
+    const marketplaceAddress = "0x736eafe09346fd4bf48a06319f40794926cf4282";
+    const beaconProxyAddress = "0xe0C6ABd9b1B1AB7a8EF867F97226C0890C9Faeb6";
     
     // Connect to the deployed NFTMarketplaceUpgradable contract
-    const NFTMarketplace = await ethers.getContractFactory("NFTMarketplaceUpgradable");
+    const NFTMarketplace = await ethers.getContractFactory("NFTMarketplaceUpgradableV2");
     const marketplace = NFTMarketplace.attach(marketplaceAddress);
 
     // Assuming the first signer is the owner of the marketplace contract
