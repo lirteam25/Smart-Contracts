@@ -1,29 +1,25 @@
-const { ethers, upgrades } = require('hardhat');
-const { getImplementationAddress } = require('@openzeppelin/upgrades-core');
+const { ethers } = require("hardhat");
+const { ThirdwebSDK } = require("@thirdweb-dev/sdk");
 
 async function main() {
-    const exchangeRateAddress = "0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada";
-    //0xd0D5e3DB44DE05E9F294BB0a3bEEaF030DE24Ada testnet
-    //0xAB594600376Ec9fD91F8e885dADF0CE036862dE0 mainnet 
-    const NFTMarketplace = await ethers.getContractFactory("NFTMarketplaceUpgradable");
-    console.log("Deploying NFTMarketplace...");
-    const nftMarketplace = await upgrades.deployProxy(NFTMarketplace, [exchangeRateAddress], { initializer: 'initialize' });
+    try {
+        const signers = await ethers.getSigners();
+        const admin = signers[1];
 
-    await nftMarketplace.waitForDeployment();
+        const sdk = await ThirdwebSDK.fromSigner(admin, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
+        const contract_address = await sdk.deployer.deployBuiltInContract(
+            "MarkeplaceV3",
+            {
+              name: "NFTMarkeplace",
+              primary_sale_recipient: "0x...",
+            },
+          );
+        console.log("Deployed at", contract_address);
 
-    const proxyAddress = (await nftMarketplace.getAddress()).toLowerCase();
-    console.log('NFTMarketplace proxy deployed to:', proxyAddress);
-
-    // Retrieve and log the implementation address
-    const implementationAddress = await getImplementationAddress(ethers.provider, proxyAddress);
-    console.log('NFTMarketplace implementation deployed to:', implementationAddress.toLowerCase());
+    } catch (error) {
+        console.error("Error:", error);
+        process.exit(1);
+    }
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main()
-    .then(() => process.exit(0))
-    .catch((error) => {
-        console.error(error);
-        process.exit(1);
-    });
+main();

@@ -19,7 +19,9 @@ async function main() {
 
         // Call the createToken function
         const createTokenTx = await nftMint.call("mintTo", [_to, _tokenId, _uri, _amount]);
-        //await createTokenTx.wait();
+        const events = await contract.events.getEvents("TokensMinted")
+
+        console.log(events)
         
         console.log("Transaction successful!");
     } catch (error) {
