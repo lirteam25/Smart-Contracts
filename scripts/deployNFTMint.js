@@ -1,22 +1,22 @@
-const { ethers, upgrades } = require('hardhat');
+const { ethers } = require("hardhat");
+const { ThirdwebSDK } = require("@thirdweb-dev/sdk");
 
 async function main() {
-  const NFTMint = await ethers.getContractFactory("NFTMintUpgradable");
-  console.log("Deploying NFTMint...");
-  const nameToken = "LIR MUSIC PROVA";
-  const symbolToken = "GMCZ";
-  const nftMint = await upgrades.deployProxy(NFTMint, [nameToken, symbolToken], { initializer: 'initialize' });
+    try {
+        const signers = await ethers.getSigners();
+        const admin = signers[1];
 
-  await nftMint.waitForDeployment();
+        const sdk = await ThirdwebSDK.fromSigner(admin, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
+        const contract_address = await sdk.deployer.deployEdition({
+            name: "NFTMint",
+            primary_sale_recipient: admin.address, 
+          });
+        console.log("Deployed at", contract_address);
 
-  console.log('NFTMint deployed to:', (await nftMint.getAddress()).toLowerCase());
+    } catch (error) {
+        console.error("Error:", error);
+        process.exit(1);
+    }
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+main();

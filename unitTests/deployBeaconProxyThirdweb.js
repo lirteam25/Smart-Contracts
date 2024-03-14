@@ -22,13 +22,13 @@ async function main() {
 
     // Data for initializing the new NFTMint contract
     // Assuming you want to initialize with a specific name and symbol
-    const _defaultAdmin = beacon_admin.address;
+    const _defaultAdmin = beacon_admin.address; // Artist wallet
     const _name = "testNFT2";
     const _symbol = "TNFT2";
     const _contractURI = "your_contract_uri";
     const _trustedForwarders = [];
-    const _primarySaleRecipient = proxy_admin.address;
-    const _royaltyRecipient = proxy_admin.address;
+    const _primarySaleRecipient = proxy_admin.address; // Artist wallet
+    const _royaltyRecipient = proxy_admin.address; // Artist wallet
     const _royaltyBps = 500; // Example: 500 basis points
     const _platformFeeBps = 200; // Example: 200 basis points
     const _platformFeeRecipient = beacon_admin.address;
