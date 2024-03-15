@@ -3,9 +3,9 @@ const { ThirdwebSDK } = require("@thirdweb-dev/sdk");
 
 async function main() {
 
-    const beaconProxyAddress = "0xC1CF42c4d8cc13bdAb713709D333Ca74c53A49EA"; 
+    const beaconProxyAddress = "0x64171747AE6AdDe869fd949E142782E7538ed2ef"; 
     const signers = await ethers.getSigners();
-    const beacon_admin = signers[1];
+    const beacon_admin = signers[0];
 
     const sdk = await ThirdwebSDK.fromSigner(beacon_admin, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
     const nftMint = await sdk.getContract(beaconProxyAddress);
