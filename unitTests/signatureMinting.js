@@ -14,30 +14,35 @@ async function main() {
         const nftMint = await sdk.getContract(beaconProxyAddress);
 
         // Signature payload
-        const MintRequest = {
-            to: buyer.address,
-            royaltyRecipient: beacon_admin.address,
-            royaltyBps: beacon_admin.address,
-            primarySaleRecipient: beacon_admin,
-            tokenId: ethers.constants.MaxUint256,
-            uri: "CollectionSigneatureMint",
-            quantity: 1,
-            pricePerToken: 0.001,
-            currency: NATIVE_TOKEN_ADDRESS,
-            validityStartTimestamp: new Date(Date.now()),
-            validityEndTimestamp: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-            uid: new Date(Date.now())
-        }
+        const payload = {
+            tokenId: 0, // Instead of metadata, we specify the token ID of the NFT to mint supply to
+            to: buyer.address, // Who will receive the NFT (or AddressZero for anyone)
+            quantity: 1, // the quantity of NFTs to mint
+            price: 0.001, // the price per NFT
+            currencyAddress: NATIVE_TOKEN_ADDRESS, // the currency to pay with
+            mintStartTime: new Date(Date.now()), // can mint anytime from now
+            mintEndTime: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000), // to 24h from now
+            royaltyRecipient: beacon_admin.address, // custom royalty recipient for this NFT
+            royaltyBps: 500, // custom royalty fees for this NFT (in bps)
+            primarySaleRecipient: beacon_admin.address // custom sale recipient for this NFT
+        };
         // see how to craft a payload to sign in the `contract.erc1155.signature.generate()` documentation
-        const signedPayload = nftMint.erc1155.signature().generate(MintRequest);
+        const signedPayload = await nftMint.erc1155.signature.generateFromTokenId(payload);
+        console.log(signedPayload);
+        // Now you can verify that the payload is valid
+        const isValid = await nftMint.erc1155.signature.verify(signedPayload);
+        console.log(isValid);
 
+        const sdk2 = await ThirdwebSDK.fromSigner(buyer, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
+        const nftMint2 = await sdk2.getContract(beaconProxyAddress);
         // now anyone can mint the NFT
-        const tx = nftMint.erc1155.signature.mint(signedPayload);
+        //const tx = await nftMint2.call("mintWithSignature", [payload, signedPayload]);
+        const tx = await nftMint2.erc1155.signature.mint(signedPayload)
         const receipt = tx.receipt; // the mint transaction receipt
         const mintedId = tx.id; // the id of the NFT minted
         
         console.log("Transaction successful!");
-        console.log(id);
+        console.log(mintedId);
 
     } catch (error) {
         console.error("Error:", error);

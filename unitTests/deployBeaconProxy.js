@@ -31,7 +31,7 @@ async function main() {
     const _royaltyRecipient = beacon_admin.address; // Artist wallet
     const _royaltyBps = 500; // Example: 500 basis points
     const _platformFeeBps = 300; // Example: 200 basis points
-    const _platformFeeRecipient = beacon_admin.address;
+    const _platformFeeRecipient = beacon_admin.address; // Marketplace owner
 
     // Data for initializing the new NFTMint contract
     const initData = NFTMint.interface.encodeFunctionData("initialize", [
