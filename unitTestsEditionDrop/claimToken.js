@@ -11,7 +11,7 @@ async function main() {
         const sdk = await ThirdwebSDK.fromSigner(buyer, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
         const nftMint = await sdk.getContract(nftMintAddress);
 
-        const tokenId = 0; // the id of the NFT you want to claim
+        const tokenId = 1; // the id of the NFT you want to claim
         const quantity = 1; // how many NFTs you want to claim
 
         const tx = await nftMint.erc1155.claim(tokenId, quantity);

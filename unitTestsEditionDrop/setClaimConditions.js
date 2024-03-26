@@ -12,7 +12,7 @@ async function main() {
         const nftMint = await sdk.getContract(nftMintAddress);
 
         const publicSaleStartTime = new Date();
-        const tokenId = 0;
+        const tokenId = 1;
         const claimConditions = [
         {
         },
@@ -20,7 +20,7 @@ async function main() {
             startTime: publicSaleStartTime, 
             currencyAddress: NATIVE_TOKEN_ADDRESS,
             price: 0.001, // public sale price
-            maxClaimableSupply: 100
+            maxClaimableSupply: 1
         }
         ];
         await nftMint.erc1155.claimConditions.set(tokenId, claimConditions);
