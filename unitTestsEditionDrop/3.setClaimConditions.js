@@ -12,7 +12,7 @@ async function main() {
         const nftMint = await sdk.getContract(nftMintAddress);
 
         const publicSaleStartTime = new Date();
-        const tokenId = 1;
+        const tokenId = 10;
         const claimConditions = [
         {
         },
@@ -23,7 +23,8 @@ async function main() {
             maxClaimableSupply: 1
         }
         ];
-        await nftMint.erc1155.claimConditions.set(tokenId, claimConditions);
+        //await nftMint.erc1155.claimConditions.set(tokenId, claimConditions, true);
+        await nftMint.call("setClaimConditions", [tokenId, claimConditions, true])
 
         const events = await nftMint.events.getEvents("ClaimConditionsUpdated")
 

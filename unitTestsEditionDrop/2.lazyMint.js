@@ -6,20 +6,19 @@ async function main() {
         // The address of your deployed Beacon Proxy
         const nftMintAddress = "0x779ea3cDc91eaE5a51AB900EBF08f633997b4a41"; //"0xC1CF42c4d8cc13bdAb713709D333Ca74c53A49EA"
         const signers = await ethers.getSigners();
-        const buyer = signers[3];
+        const buyer = signers[2];
 
         const sdk = await ThirdwebSDK.fromSigner(buyer, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
         const nftMint = await sdk.getContract(nftMintAddress);
 
-        const tokenId = 1; // the id of the NFT you want to claim
-        const quantity = 1; // how many NFTs you want to claim
+        const data = []
 
-        const tx = await nftMint.erc1155.claim(tokenId, quantity);
-        const receipt = tx.receipt; // the transaction receipt
-
-        console.log(receipt)
+        const results = await nftMint.call("lazyMint", [1, "baseURI", data]); // uploads and creates the NFTs on chain
+        const events = await nftMint.events.getEvents("TokensLazyMinted")
         
+        console.log(events[0].data.startTokenId.toString())
         console.log("Transaction successful!");
+
     } catch (error) {
         console.error("Error:", error);
         process.exit(1);
