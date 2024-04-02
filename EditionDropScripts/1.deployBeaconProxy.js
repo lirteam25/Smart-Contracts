@@ -14,11 +14,11 @@ async function main() {
     const factoryContract = NFTMintFactory.attach(factoryAddress);
 
     // ABI for the NFTMint contract
-    const NFTMintABI = require('../NFTMintABI.json'); // Adjust the path accordingly 
-    const NFTMintAddress = "0xCCf28A443e35F8bD982b8E8651bE9f6caFEd4672"; // Replace with the actual NFTMint contract address
+    const NFTMintABI = require('../NFTMintDropABI.json'); // Adjust the path accordingly 
+    const NFTMintAddress = "0x54C97C29021A12CACb31F8388B32dd5486083F7B"; // Replace with the actual NFTMint contract address
 
     // Create a contract instance for NFTMint using its ABI
-    const NFTMint = new ethers.Contract(NFTMintAddress, NFTMintABI, beacon_admin);
+    const NFTMint = new ethers.Contract(NFTMintAddress, NFTMintDropABI, beacon_admin);
 
     // Data for initializing the new NFTMint contract
     // Assuming you want to initialize with a specific name and symbol

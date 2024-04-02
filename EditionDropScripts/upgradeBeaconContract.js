@@ -1,8 +1,8 @@
 const { ethers } = require("hardhat");
 
 async function main() {
-    const factoryAddress = "0xC7A9074039C7ef74c8fb087dFA9546B4917510f7" // Replace with your factory contract address
-    const newImplementationAddress = "0xCCf28A443e35F8bD982b8E8651bE9f6caFEd4672"
+    const factoryAddress = "0xD41341856bBDB36aDEfDB6a08Ad9d3c523a8973E" // Replace with your factory contract address
+    const newImplementationAddress = "0x54C97C29021A12CACb31F8388B32dd5486083F7B"
     const signers = await ethers.getSigners(); // Fetch the signers
     
 

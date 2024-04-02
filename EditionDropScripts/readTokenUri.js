@@ -11,24 +11,12 @@ async function main() {
         const sdk = await ThirdwebSDK.fromSigner(admin, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
         const nftMint = await sdk.getContract(nftMintAddress);
 
-        const publicSaleStartTime = new Date();
-        const tokenId = 10;
-        const claimConditions = [
-        {
-        },
-        {
-            startTime: publicSaleStartTime, 
-            currencyAddress: NATIVE_TOKEN_ADDRESS,
-            price: 0.001, // public sale price
-            maxClaimableSupply: 1
-        }
-        ];
+        const _tokenId = 4
+
         //await nftMint.erc1155.claimConditions.set(tokenId, claimConditions, true);
-        await nftMint.call("setClaimConditions", [tokenId, claimConditions, true])
+        const data = await nftMint.call("uri", [_tokenId])
 
-        const events = await nftMint.events.getEvents("ClaimConditionsUpdated")
-
-        console.log(events)
+        console.log("URI:", data)
         
         console.log("Transaction successful!");
     } catch (error) {
