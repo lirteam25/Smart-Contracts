@@ -4,7 +4,7 @@ const { ThirdwebSDK, NATIVE_TOKEN_ADDRESS } = require("@thirdweb-dev/sdk");
 async function main() {
 
     const marketplaceAddress = "0x0ab38Fa75C98721F0604dcc5E52D30D9C1a68459"; 
-    const nftMintAddress = "0x64171747AE6AdDe869fd949E142782E7538ed2ef";//"0xC1CF42c4d8cc13bdAb713709D333Ca74c53A49EA"
+    const nftMintAddress = "0x779ea3cDc91eaE5a51AB900EBF08f633997b4a41";//"0xC1CF42c4d8cc13bdAb713709D333Ca74c53A49EA"
     const signers = await ethers.getSigners();
     const lister = signers[0];
 
@@ -17,7 +17,7 @@ async function main() {
         // token ID of the asset you want to list
         tokenId: "0",
         // how many of the asset you want to list
-        quantity: 2,
+        quantity: 1,
         // address of the currency contract that will be used to pay for the listing
         currencyContractAddress: NATIVE_TOKEN_ADDRESS, // USDC contract address Mumbai: "0xe6b8a5CF854791412c1f6EFC7CAf629f5Df1c747",
         // The price to pay per unit of NFTs listed.

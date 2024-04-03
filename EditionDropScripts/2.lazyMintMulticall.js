@@ -6,9 +6,9 @@ async function main() {
         // The address of your deployed Beacon Proxy
         const nftMintAddress = "0x779ea3cDc91eaE5a51AB900EBF08f633997b4a41"; //"0xC1CF42c4d8cc13bdAb713709D333Ca74c53A49EA"
         const signers = await ethers.getSigners();
-        const buyer = signers[2];
+        const owner = signers[2];
 
-        const sdk = await ThirdwebSDK.fromSigner(buyer, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
+        const sdk = await ThirdwebSDK.fromSigner(owner, "mumbai", {secretKey: process.env.THIRDWEB_API_KEY});
         const nftMint = await sdk.getContract(nftMintAddress);
 
         const nextTokenIdToMint = parseInt(await nftMint.call("nextTokenIdToMint", []));
@@ -22,7 +22,7 @@ async function main() {
             startTime: publicSaleStartTime, 
             currencyAddress: NATIVE_TOKEN_ADDRESS,
             price: 0.001, // public sale price
-            maxClaimableSupply: 1
+            maxClaimableSupply: 3
         }];
 
         const data = []

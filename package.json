@@ -19,7 +19,8 @@
     "@thirdweb-dev/sdk": "^4.0.38",
     "dotenv": "^16.3.1",
     "ethers": "^5.7.2",
-    "hardhat": "^2.18.1"
+    "hardhat": "^2.18.1",
+    "siwe": "^2.1.4"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",
