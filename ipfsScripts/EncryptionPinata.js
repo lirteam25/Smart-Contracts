@@ -133,7 +133,8 @@ const decryptFile = async (fileToDecrypt) => {
     } catch (error) {
       alert("Trouble decrypting file")
       console.log(error)
-    };
+    }
+};
 
 /*     <input
   type="text"

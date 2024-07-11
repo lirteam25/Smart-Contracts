@@ -4,7 +4,7 @@ async function main() {
 
     // Deploy the Factory Contract
     const NFTMintFactory = await ethers.getContractFactory("NFTMintFactory");
-    const factory = await NFTMintFactory.deploy("0x54C97C29021A12CACb31F8388B32dd5486083F7B"); // Replace with the current NFTMint implementation address
+    const factory = await NFTMintFactory.deploy("0x76F948E5F13B9A84A81E5681df8682BBf524805E"); // Replace with the current NFTMint implementation address
     await factory.deployed();
     console.log("NFTMintFactory deployed to:", (await factory.address));
 }

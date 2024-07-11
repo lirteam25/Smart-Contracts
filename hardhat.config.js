@@ -8,14 +8,14 @@ module.exports = {
   solidity: "0.8.20",
   networks: {
     hardhat: {},
-    /* polygon_amoy: {
-      url: process.env.ALCHEMY_RPC_AMOY, //process.env.ALCHEMY_URL,
+    polygon_amoy: {
+      url: process.env.ALCHEMY_RPC_AMOY, 
       accounts: [`0x${process.env.PRIVATE_KEY_LIR_TESTNET}`] 
-    } */
-    polygon_mumbai: {
+    } 
+    /* polygon_mumbai: {
       url: process.env.ALCHEMY_RPC_MUMBAI, //process.env.ALCHEMY_URL,
       accounts: [`0x${process.env.PRIVATE_KEY_LIR_TESTNET}`,`0x${process.env.PRIVATE_KEY_LIR_FILO_TESTNET}`,`0x${process.env.PRIVATE_KEY_LIR_2}`, `0x${process.env.PRIVATE_KEY_LIR_TESTNET_BACKUP}`, `0x${process.env.PRIVATE_KEY_LIR}`] 
-    },
+    }, */
     // polygon_mainnet: {
     //   url: process.env.ALCHEMY_RPC_MAINNET,
     //   accounts: [`0x${process.env.PRIVATE_KEY_TROVIERO}`]
